@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".profile_view"
+    tools:showIn="@layout/activity_profile_view">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:background="#fff"
+        android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="10dp">
+
+        <LinearLayout
+            android:layout_width="283dp"
+            android:layout_height="54dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="10dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="32dp"
+                android:src="@drawable/ic_baseline_person_24"
+                app:tint="@color/colorPrimary" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="30dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="Phone"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/phoneOfReceiver3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:background="#00000000"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="Lalit Tilwani"
+                    android:textSize="17sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+        <View
+            android:layout_width="350dp"
+            android:layout_height="1dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="20dp"
+            android:background="#D3D3D3" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="10dp">
+
+            <LinearLayout
+                android:layout_width="283dp"
+                android:layout_height="54dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginRight="10dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_baseline_info_24"
+                    app:tint="@color/colorPrimary" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="30dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="Status"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/status"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:background="#00000000"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="Hi there..."
+                        android:textSize="17sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginLeft="20dp"-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            android:fontFamily="@font/muli_black"-->
+<!--            android:text="Phone Number"-->
+<!--            android:textColor="@color/Black"-->
+<!--            android:textSize="18sp" />-->
+
+
+<!--        <TextView-->
+<!--            android:id="@+id/phoneOfReceiver3"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginLeft="20dp"-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            android:background="#00000000"-->
+<!--            android:backgroundTint="#00000000"-->
+<!--            android:textColor="@color/Black"-->
+<!--            android:textSize="12sp"-->
+<!--            android:textStyle="bold" />-->
+
+
+
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="horizontal">-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginLeft="20dp"-->
+<!--                android:layout_marginTop="20dp"-->
+<!--                android:fontFamily="@font/muli_black"-->
+<!--                android:text="Status"-->
+<!--                android:textColor="@color/Black"-->
+<!--                android:textSize="18sp" />-->
+
+
+<!--&lt;!&ndash;            <de.hdodenhof.circleimageview.CircleImageView&ndash;&gt;-->
+<!--&lt;!&ndash;                android:id="@+id/editStatus"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_width="20dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_height="20dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_marginLeft="15dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_marginTop="25dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_marginBottom="5dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:foreground="@drawable/ic_baseline_edit_24"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:paddingLeft="5dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:paddingTop="5dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:paddingRight="5dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:paddingBottom="5dp" />&ndash;&gt;-->
+
+<!--        </LinearLayout>-->
+
+<!--        <EditText-->
+<!--            android:id="@+id/status"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginLeft="20dp"-->
+<!--            android:layout_marginTop="13dp"-->
+<!--            android:background="#00000000"-->
+<!--            android:text="Hi There....."-->
+<!--            android:textSize="12sp"-->
+<!--            android:textStyle="bold" />-->
+
+<!--        <View-->
+<!--            android:layout_width="350dp"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_marginLeft="20dp"-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            android:layout_marginRight="20dp"-->
+<!--            android:background="#D3D3D3" />-->
+
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

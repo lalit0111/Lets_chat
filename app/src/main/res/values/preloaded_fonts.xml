@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="preloaded_fonts" translatable="false">
+        <item>@font/abhaya_libre_semibold</item>
+        <item>@font/adamina</item>
+        <item>@font/average</item>
+        <item>@font/berkshire_swash</item>
+        <item>@font/bree_serif</item>
+        <item>@font/crete_round</item>
+        <item>@font/muli</item>
+        <item>@font/muli_black</item>
+        <item>@font/muli_semibold</item>
+        <item>@font/roboto_medium</item>
+    </array>
+</resources>

@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context=".phone">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="95dp"
+        android:layout_height="120dp"
+        android:src="@drawable/myicon"
+        android:transitionName="shared"
+        app:layout_constraintBottom_toTopOf="@+id/otpCard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.571" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/otpCard"
+        android:layout_width="match_parent"
+        android:layout_height="734dp"
+        android:layout_marginTop="148dp"
+        app:cardBackgroundColor="#fff"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="40dp"
+                android:fontFamily="@font/muli_black"
+                android:gravity="center_horizontal"
+                android:paddingBottom="20dp"
+                android:text="One Time Password"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="45sp" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="60dp"
+                android:fontFamily="@font/muli_semibold"
+                android:gravity="center_horizontal"
+                android:text="VERIFICATION"
+                android:textColor="#000000"
+                android:textSize="22sp" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/muli"
+                android:gravity="center_horizontal"
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
+                android:paddingRight="20dp"
+                android:text="Enter One time Password Sent To Your\nRegistered Number"
+                android:textAlignment="center"
+                android:textSize="16sp" />
+
+            <com.mukesh.OtpView
+                android:id="@+id/otp_view"
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="40dp"
+                android:hint="123456"
+                android:cursorVisible="false"
+                android:inputType="number"
+                android:itemBackground="#e1f4f3"
+                android:textSize="20sp"
+                app:hideLineWhenFilled="true"
+                app:itemCount="6"
+                app:lineColor="#000000"
+                app:lineWidth="1.3dp" />
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/setupText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|bottom"
+                android:gravity="bottom"
+                android:includeFontPadding="false"
+                android:layout_marginTop="20dp"
+                android:text="Setting Up..."
+                android:fontFamily="@font/muli_black"/>
+
+            <ProgressBar
+                android:id="@+id/progress_circular"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="316dp"
+                android:layout_height="29dp"
+                android:layout_gravity="center_horizontal"
+                android:min="0"
+                android:max="100" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/verify"
+                android:layout_width="250dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:elevation="0dp"
+                android:fontFamily="@font/muli_semibold"
+                android:gravity="center_horizontal"
+                android:paddingTop="13dp"
+                android:shadowColor="#fff"
+                android:text="Verify Code"
+                android:transitionName="sharedVerify"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                app:elevation="0dp" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/signupCard"
+        android:layout_width="match_parent"
+        android:layout_height="734dp"
+        android:layout_marginTop="148dp"
+        app:cardBackgroundColor="#fff"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="50dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Signup With Mobile Number"
+                android:textColor="#000000"
+                android:textSize="20dp"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/muli_semibold"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="We will send you OTP on this number to verify"
+                android:layout_gravity="center_horizontal"
+                android:textAlignment="center"
+                android:paddingTop="20dp"
+                android:paddingBottom="10dp"
+                />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/userImage"
+                    android:layout_width="189dp"
+                    android:layout_height="139dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/new_profile"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:civ_border_color="@color/colorPrimary"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="39dp"
+                    android:layout_height="38dp"
+                    android:id="@+id/uploadImageButton"
+                    android:layout_marginEnd="16dp"
+                    android:background="#00000000"
+                    android:backgroundTint="#00000000"
+                    android:foreground="@drawable/ic_baseline_photo_camera_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_gravity="center_horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/imageView">
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="15dp"
+                    android:layout_weight="1"
+                    app:boxStrokeColor="@color/colorPrimary"
+                    app:startIconDrawable="@drawable/ic_baseline_phone_android_24"
+                    app:startIconTint="#000000">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="Phone"
+                        android:maxLength="10"
+                        android:inputType="number"
+                        android:textSize="16sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="15dp"
+                    android:layout_weight="1"
+                    app:boxStrokeColor="@color/colorPrimary"
+                    app:startIconDrawable="@drawable/ic_baseline_person_24"
+                    app:startIconTint="#000000">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/username"
+                        android:hint="Username"
+                        android:maxLines="1"
+                        android:textSize="16sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </LinearLayout>
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/signupButton"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:text="Signup"
+                android:layout_marginTop="10dp"
+                android:textSize="16sp"/>
+
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

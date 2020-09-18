@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
+    android:layout_marginTop="10dp">
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginRight="5dp"
+        android:gravity="center"
+        android:text="00:00"
+        android:textColor="@color/Black"
+        android:textSize="9sp" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:minWidth="50dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_corner"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="15dp"
+        android:elevation="5dp">
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/chatText"
+            android:maxWidth="230dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:text="Hi there..."
+            android:textSize="17sp"
+            android:fontFamily="@font/muli"
+            android:textColor="@color/Black"
+            android:paddingLeft="20dp"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:paddingRight="20dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>
