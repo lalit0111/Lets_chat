@@ -1,6 +1,7 @@
 package com.example.letschat.model;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.Log;
@@ -26,6 +27,8 @@ import com.example.letschat.Chat;
 import com.example.letschat.R;
 import com.example.letschat.imageViewer;
 import com.example.letschat.userDetails;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -39,8 +42,7 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
-
+public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
 
     List<String> titles = new ArrayList<String>();
@@ -48,29 +50,31 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
     List<String> phones = new ArrayList<>();
     List<String> times = new ArrayList<>();
     FirebaseDatabase firebaseDatabase;
-    DatabaseReference databaseReference;
+    DatabaseReference databaseReference, databaseReference2;
     FirebaseStorage firebaseStorage;
     StorageReference storageReference;
     StorageReference imageReference;
+    FirebaseUser firebaseUser;
     Long time = 0L;
     userDetails userInfo;
+    String phoneOfReciever, senderPhone;
 
 
-    public  Adapter(){
+    public Adapter() {
 
     }
 
-    public Adapter(List<String> titles,List<String> content,List<String> phones,List<String> times){
-        this.titles=titles;
-        this.content=content;
-        this.phones=phones;
+    public Adapter(List<String> titles, List<String> content, List<String> phones, List<String> times) {
+        this.titles = titles;
+        this.content = content;
+        this.phones = phones;
         this.times = times;
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview, parent,false);
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview, parent, false);
         Log.d("item", "card created");
         return new ViewHolder(view);
     }
@@ -82,12 +86,51 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
         holder.chat.setText(content.get(position));
         holder.lastTime.setText(times.get(position));
 
-
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         firebaseDatabase = FirebaseDatabase.getInstance();
+
+        senderPhone = firebaseUser.getPhoneNumber();
+        phoneOfReciever = phones.get(position);
+
+        if (Long.parseLong(phoneOfReciever) > Long.parseLong(senderPhone)) {
+            databaseReference2 = firebaseDatabase.getReference("seen").child(phoneOfReciever + "_" + senderPhone);
+
+        } else {
+            databaseReference2 = firebaseDatabase.getReference("seen").child(senderPhone + "_" + phoneOfReciever);
+        }
+
+
         databaseReference = firebaseDatabase.getReference().child("Users").child(phones.get(position));
+
 
         firebaseStorage = FirebaseStorage.getInstance();
         storageReference = firebaseStorage.getReference();
+
+
+        databaseReference2.child(firebaseUser.getPhoneNumber()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                boolean i = (boolean) snapshot.getValue();
+                Log.d("check3", String.valueOf(i));
+                if (!i) {
+                    holder.chat.setTypeface(Typeface.DEFAULT_BOLD);
+                    holder.name.setTypeface(Typeface.DEFAULT_BOLD);
+                    holder.lastTime.setTypeface(Typeface.DEFAULT_BOLD);
+                }
+                else {
+                    holder.chat.setTypeface(Typeface.DEFAULT);
+                    holder.name.setTypeface(Typeface.DEFAULT);
+                    holder.lastTime.setTypeface(Typeface.DEFAULT);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -161,10 +204,10 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
 
     @Override
     public int getItemCount() {
-       return titles.size();
+        return titles.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         View v;
         TextView name;
@@ -174,11 +217,11 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            contactsImage=itemView.findViewById(R.id.mainCircular);
+            contactsImage = itemView.findViewById(R.id.mainCircular);
             name = itemView.findViewById(R.id.name);
             chat = itemView.findViewById(R.id.chat);
             lastTime = itemView.findViewById(R.id.lastTime);
-            v=itemView;
+            v = itemView;
         }
     }
 }

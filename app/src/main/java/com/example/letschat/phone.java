@@ -101,7 +101,7 @@ public class phone extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (phone.getText().toString().length() == 10 && username.getText() != null) {
+                if (phone.getText().toString().length() == 10 && !username.getText().toString().isEmpty()) {
                     phoneNumber = "+91" + phone.getText().toString();
                     Username = username.getText().toString();
 
