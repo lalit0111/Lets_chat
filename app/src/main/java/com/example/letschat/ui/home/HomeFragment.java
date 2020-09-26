@@ -82,8 +82,8 @@ public class HomeFragment extends Fragment {
 
         recyclerView = root.findViewById(R.id.recycler);
 
-        toolbarText = getActivity().findViewById(R.id.title_text);
-        toolbarText.setText("CHATS");
+//        toolbarText = getActivity().findViewById(R.id.title_text);
+//        toolbarText.setText("CHATS");
 
 
         int resId = R.anim.layout_fall;

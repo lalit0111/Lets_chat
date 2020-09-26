@@ -84,8 +84,8 @@ public class SlideshowFragment extends Fragment {
                 ViewModelProviders.of(this).get(SlideshowViewModel.class);
         final View root = inflater.inflate(R.layout.fragment_slideshow, container, false);
 
-        TextView toolbarText = getActivity().findViewById(R.id.title_text);
-        toolbarText.setText("Settings");
+//        TextView toolbarText = getActivity().findViewById(R.id.title_text);
+//        toolbarText.setText("Settings");
 
         uploadButton = root.findViewById(R.id.uploadImageButton2);
         userImage = root.findViewById(R.id.userImage2);

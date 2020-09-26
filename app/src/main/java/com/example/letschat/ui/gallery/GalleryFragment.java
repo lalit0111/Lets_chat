@@ -25,8 +25,8 @@ public class GalleryFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_gallery, container, false);
 
 
-        TextView toolbarText = getActivity().findViewById(R.id.title_text);
-        toolbarText.setText("Global Chats");
+//        TextView toolbarText = getActivity().findViewById(R.id.title_text);
+//        toolbarText.setText("Global Chats");
 
         return root;
     }
