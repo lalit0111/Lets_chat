@@ -90,6 +90,8 @@ public class imageViewer extends AppCompatActivity {
                             .listener(new RequestListener<Drawable>() {
                                 @Override
                                 public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                    imageView.setImageResource(R.drawable.dp_default);
+                                    Toast.makeText(imageViewer.this, "Unable to load", Toast.LENGTH_SHORT).show();
                                     return false;
                                 }
 
@@ -103,7 +105,7 @@ public class imageViewer extends AppCompatActivity {
 
                 }
                 else {
-                    imageView.setImageResource(R.drawable.new_profile);
+                    imageView.setImageResource(R.drawable.dp_default);
                 }
 
             }

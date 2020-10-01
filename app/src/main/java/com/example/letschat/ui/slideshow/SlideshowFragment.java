@@ -131,6 +131,8 @@ public class SlideshowFragment extends Fragment {
                             .listener(new RequestListener<Drawable>() {
                                 @Override
                                 public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                    Toast.makeText(getContext(), "Unable to load", Toast.LENGTH_SHORT).show();
+                                    userImage.setImageResource(R.drawable.dp_default);
                                     return false;
                                 }
 
@@ -143,7 +145,7 @@ public class SlideshowFragment extends Fragment {
                             .into(userImage);
 
                 } else {
-                    userImage.setImageResource(R.drawable.download);
+                    userImage.setImageResource(R.drawable.dp_default);
                 }
 
             }

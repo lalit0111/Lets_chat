@@ -255,6 +255,8 @@ public class Chat extends AppCompatActivity {
                             .listener(new RequestListener<Drawable>() {
                                 @Override
                                 public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                    profilePic.setImageResource(R.drawable.dp_default);
+                                    Toast.makeText(Chat.this, "Unable to load", Toast.LENGTH_SHORT).show();
                                     return false;
                                 }
 
@@ -267,7 +269,7 @@ public class Chat extends AppCompatActivity {
                             .into(profilePic);
 
                 } else {
-                    profilePic.setImageResource(R.drawable.new_profile);
+                    profilePic.setImageResource(R.drawable.dp_default);
                 }
 
             }

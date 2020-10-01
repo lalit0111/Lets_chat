@@ -2,6 +2,7 @@ package com.example.letschat;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -37,6 +38,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -93,6 +95,7 @@ public class profile_view extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 imageReference = storageReference.child("UsersProfileImages/" + phoneOfReciever2);
                 userInfo = snapshot.getValue(userDetails.class);
+                toolBarLayout.setExpandedTitleTypeface(Typeface.DEFAULT_BOLD);
                 toolBarLayout.setTitle(username);
                 assert userInfo != null;
                 if (!userInfo.getImageUrl().equals("default")) {
@@ -105,6 +108,8 @@ public class profile_view extends AppCompatActivity {
                             .listener(new RequestListener<Drawable>() {
                                 @Override
                                 public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                    profilePic.setImageResource(R.drawable.dp_default);
+                                    Toast.makeText(profile_view.this, "Unable to load", Toast.LENGTH_SHORT).show();
                                     return false;
                                 }
 
@@ -117,7 +122,7 @@ public class profile_view extends AppCompatActivity {
                             .into(profilePic);
 
                 } else {
-                    profilePic.setImageResource(R.drawable.new_profile);
+                    profilePic.setImageResource(R.drawable.dp_default);
                     toolbar.setTitleTextColor(ContextCompat.getColor(getApplicationContext(),R.color.Black));
                 }
 

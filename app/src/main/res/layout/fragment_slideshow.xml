@@ -34,7 +34,7 @@
                     android:layout_width="170dp"
                     android:layout_height="120dp"
                     android:layout_gravity="center_horizontal"
-                    android:src="@drawable/new_profile"
+                    android:src="@drawable/loading_dp"
                     app:civ_border_color="@color/colorPrimary"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

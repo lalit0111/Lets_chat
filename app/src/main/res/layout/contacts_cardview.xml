@@ -32,7 +32,7 @@
                         android:layout_height="55dp"
                         android:layout_marginLeft="10dp"
                         android:layout_gravity="bottom"
-                        android:src="@drawable/new_profile" />
+                        android:src="@drawable/loading_dp" />
 
                 </androidx.cardview.widget.CardView>
 

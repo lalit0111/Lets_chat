@@ -27,7 +27,7 @@
             android:paddingTop="@dimen/nav_header_vertical_spacing"
             app:civ_border_color="#fff"
             app:civ_border_width="2dp"
-            android:src="@drawable/new_profile"
+            android:src="@drawable/loading_dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

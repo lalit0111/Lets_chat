@@ -116,11 +116,14 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
                     holder.chat.setTypeface(Typeface.DEFAULT_BOLD);
                     holder.name.setTypeface(Typeface.DEFAULT_BOLD);
                     holder.lastTime.setTypeface(Typeface.DEFAULT_BOLD);
+                    holder.contactsImage.setBorderColor(holder.itemView.getResources().getColor(R.color.colorPrimary));
+                    holder.contactsImage.setBorderWidth(6);
                 }
                 else {
                     holder.chat.setTypeface(Typeface.DEFAULT);
                     holder.name.setTypeface(Typeface.DEFAULT);
                     holder.lastTime.setTypeface(Typeface.DEFAULT);
+                    holder.contactsImage.setBorderWidth(0);
                 }
 
             }
@@ -146,6 +149,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
                             .listener(new RequestListener<Drawable>() {
                                 @Override
                                 public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                    holder.contactsImage.setImageResource(R.drawable.dp_default);
                                     return false;
                                 }
 
@@ -158,7 +162,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
                             .into(holder.contactsImage);
 
                 } else {
-                    holder.contactsImage.setImageResource(R.drawable.new_profile);
+                    holder.contactsImage.setImageResource(R.drawable.dp_default);
                 }
 
             }

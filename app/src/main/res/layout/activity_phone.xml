@@ -182,7 +182,7 @@
                     android:layout_width="189dp"
                     android:layout_height="139dp"
                     android:layout_gravity="center_horizontal"
-                    android:src="@drawable/new_profile"
+                    android:src="@drawable/dp_default"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:civ_border_color="@color/colorPrimary"
                     app:layout_constraintHorizontal_bias="1.0"

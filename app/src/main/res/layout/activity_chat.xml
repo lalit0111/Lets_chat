@@ -77,7 +77,7 @@
                 android:layout_width="50dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center|left"
-                android:src="@drawable/new_profile"
+                android:src="@drawable/loading_dp"
                 app:civ_border_color="#fff"
                 app:civ_border_width="1.3dp" />
 

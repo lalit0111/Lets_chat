@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -93,6 +94,8 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
                             .listener(new RequestListener<Drawable>() {
                                 @Override
                                 public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                    holder.contactsImage.setImageResource(R.drawable.dp_default);
+                                    Toast.makeText(holder.itemView.getContext(), "Unable to load", Toast.LENGTH_SHORT).show();
                                     return false;
                                 }
 
@@ -105,7 +108,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
                             .into(holder.contactsImage);
 
                 } else {
-                    holder.contactsImage.setImageResource(R.drawable.new_profile);
+                    holder.contactsImage.setImageResource(R.drawable.dp_default);
                 }
 
             }

@@ -141,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
                             .into(drawerImage);
                 }
                 else{
-                    drawerImage.setImageResource(R.drawable.download);
+                    drawerImage.setImageResource(R.drawable.dp_default);
                     progressBarImage.setVisibility(View.GONE);
                 }
 
