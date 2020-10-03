@@ -47,7 +47,7 @@ public class imageViewer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_viewer);
         toolbar = findViewById(R.id.imageViewertoolbar);
-        imageView = findViewById(R.id.imageShow);
+        imageView = findViewById(R.id.fullscreen_content);
         setSupportActionBar(toolbar);
 
         Window window = getWindow();
@@ -101,6 +101,7 @@ public class imageViewer extends AppCompatActivity {
                                 }
                             })
                             .signature(new MediaStoreSignature("image/jpeg", time,getApplicationContext().getResources().getConfiguration().orientation))
+                            .centerCrop()
                             .into(imageView);
 
                 }
