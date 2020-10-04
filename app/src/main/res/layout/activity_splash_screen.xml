@@ -20,4 +20,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.499" />
 
+    <com.eyalbira.loadingdots.LoadingDots
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:LoadingDots_auto_play="true"
+        app:LoadingDots_loop_duration="1000"
+        app:LoadingDots_dots_color="@color/colorPrimary"
+        app:LoadingDots_dots_count="5"
+        app:LoadingDots_dots_space="10dp"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

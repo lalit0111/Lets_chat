@@ -10,6 +10,7 @@
         <item>@font/muli</item>
         <item>@font/muli_black</item>
         <item>@font/muli_semibold</item>
+        <item>@font/roboto_bold</item>
         <item>@font/roboto_medium</item>
     </array>
 </resources>
