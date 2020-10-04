@@ -128,6 +128,7 @@ public class SlideshowFragment extends Fragment {
                 if (imageReference != null && !userInfo.getImageUrl().equals("default")) {
                     Glide.with(root.getContext() /* context */)
                             .load(imageReference)
+                            .placeholder(R.drawable.loading_dp)
                             .listener(new RequestListener<Drawable>() {
                                 @Override
                                 public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
@@ -251,12 +252,13 @@ public class SlideshowFragment extends Fragment {
                             @Override
                             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                                 UpdateDatabase(userInfo.getUsername(), phone, String.valueOf(System.currentTimeMillis()),userInfo.getStatus());
-                                Toast.makeText(getContext(), "Image Uploaded", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(getContext(), "Image Uploaded", Toast.LENGTH_SHORT).show();
                             }
                         })
                         .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                             @Override
                             public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
+                                userImage.setImageResource(R.drawable.loading_dp);
                                 double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
                                 int currentProgress = (int) progress;
                             }

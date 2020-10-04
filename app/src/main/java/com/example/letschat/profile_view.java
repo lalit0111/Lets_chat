@@ -104,6 +104,7 @@ public class profile_view extends AppCompatActivity {
                 if (imageReference != null && !userInfo.getImageUrl().equals("default")) {
                     Glide.with(getApplicationContext() /* context */)
                             .load(imageReference)
+                            .placeholder(R.drawable.loading_dp)
                             .fitCenter()
                             .listener(new RequestListener<Drawable>() {
                                 @Override

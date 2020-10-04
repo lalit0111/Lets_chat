@@ -252,6 +252,7 @@ public class Chat extends AppCompatActivity {
                 if (imageReference != null && !userInfo.getImageUrl().equals("default")) {
                     Glide.with(getApplicationContext() /* context */)
                             .load(imageReference)
+                            .placeholder(R.drawable.loading_dp)
                             .listener(new RequestListener<Drawable>() {
                                 @Override
                                 public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {

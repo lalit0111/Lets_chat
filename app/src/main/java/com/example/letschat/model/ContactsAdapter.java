@@ -91,6 +91,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
                 if (imageReference != null && !userInfo.getImageUrl().equals("default")) {
                     Glide.with(holder.itemView.getContext() /* context */)
                             .load(imageReference)
+                            .placeholder(R.drawable.loading_dp)
                             .listener(new RequestListener<Drawable>() {
                                 @Override
                                 public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
