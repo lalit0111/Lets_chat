@@ -1,17 +1,12 @@
 package com.example.letschat;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.arch.core.executor.TaskExecutor;
-import androidx.cardview.widget.CardView;
-import androidx.core.app.ActivityOptionsCompat;
-
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -20,31 +15,32 @@ import android.view.animation.AnimationUtils;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.gms.tasks.TaskExecutors;
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textview.MaterialTextView;
 import com.google.firebase.FirebaseException;
+import com.google.firebase.FirebaseTooManyRequestsException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
-import com.google.firebase.storage.StorageMetadata;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.mukesh.OtpView;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
@@ -101,7 +97,7 @@ public class phone extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (phone.getText().toString().length() == 10 && !username.getText().toString().isEmpty()) {
+                if (phone.getText().toString().length() == 10 && !username.getText().toString().isEmpty() && isInternetConnection()) {
                     phoneNumber = "+91" + phone.getText().toString();
                     Username = username.getText().toString();
 
@@ -126,6 +122,8 @@ public class phone extends AppCompatActivity {
 
                         }
                     });
+                } else if (!isInternetConnection()) {
+                    Toast.makeText(phone.this, "Please check your internet connection", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(phone.this, "Enter Valid Phone Number And Username", Toast.LENGTH_SHORT).show();
                 }
@@ -163,7 +161,7 @@ public class phone extends AppCompatActivity {
 
 
     private void sendVerificationCodeToUser(String phoneNumber) {
-
+        Log.d("check5 ", "sent");
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
                 phoneNumber,        // Phone number to verify
                 60,                 // Timeout duration
@@ -174,41 +172,59 @@ public class phone extends AppCompatActivity {
 
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
-        @Override
-        public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
-            super.onCodeSent(s, forceResendingToken);
-            codeBySystem = s;
-            Toast.makeText(phone.this, "Code Sent", Toast.LENGTH_SHORT).show();
-        }
 
         @Override
         public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
-            String code = "123456";
-            // String code = phoneAuthCredential.getSmsCode();
+            Log.d("check5 ", "on verification");
+//            String code = "123456";
+            String code = phoneAuthCredential.getSmsCode();
             pinview.setText(code);
             if (code != null) {
+                Log.d("check5 ", "inside");
                 setupText.setVisibility(View.VISIBLE);
                 progressBar.setVisibility(View.VISIBLE);
-                //verifyCode(code);
-                signInUserByCredential(phoneAuthCredential);
+                verifyCode(code);
+//                signInUserByCredential(phoneAuthCredential);
             }
         }
 
         @Override
         public void onVerificationFailed(@NonNull FirebaseException e) {
             Toast.makeText(phone.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+
+            if (e instanceof FirebaseAuthInvalidCredentialsException) {
+                // Invalid request
+                Toast.makeText(phone.this, " Enter correct number", Toast.LENGTH_LONG).show();
+                // ...
+            } else if (e instanceof FirebaseTooManyRequestsException) {
+                // The SMS quota for the project has been exceeded
+                Toast.makeText(phone.this, "Too many OTP request!", Toast.LENGTH_SHORT).show();
+                // ...
+            }
+
             progressBar.setVisibility(View.INVISIBLE);
             setupText.setVisibility(View.INVISIBLE);
             pinview.setText("");
         }
+
+        @Override
+        public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+            super.onCodeSent(s, forceResendingToken);
+            codeBySystem = s;
+            Toast.makeText(phone.this, "Code Sent", Toast.LENGTH_SHORT).show();
+        }
     };
 
+
+
     private void verifyCode(String codeByUser) {
+        Log.d("check5 ", "verify code");
         PhoneAuthCredential credential = PhoneAuthProvider.getCredential(codeBySystem, codeByUser);
         signInUserByCredential(credential);
     }
 
     private void signInUserByCredential(PhoneAuthCredential credential) {
+        Log.d("check5 ", "sign");
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         firebaseAuth.signInWithCredential(credential).addOnCompleteListener(phone.this, new OnCompleteListener<AuthResult>() {
             @Override
@@ -312,5 +328,18 @@ public class phone extends AppCompatActivity {
             signupCard.setTranslationY(0);
         } else
             super.onBackPressed();
+    }
+
+    public boolean isInternetConnection() {
+        boolean connected = false;
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+            //we are connected to a network
+            connected = true;
+        } else
+            connected = false;
+
+        return connected;
     }
 }
