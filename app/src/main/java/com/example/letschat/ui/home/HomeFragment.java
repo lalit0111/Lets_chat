@@ -343,6 +343,9 @@ public class HomeFragment extends Fragment {
             if (cursor.moveToFirst()) {
                 contactName = cursor.getString(0);
             }
+            else {
+                contactName = phoneNumber;
+            }
             cursor.close();
         }
 

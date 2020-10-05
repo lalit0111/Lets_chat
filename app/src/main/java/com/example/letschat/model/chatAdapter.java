@@ -91,21 +91,22 @@ public class chatAdapter extends RecyclerView.Adapter<chatAdapter.ViewHolder> {
 
             String[] projection = new String[]{ContactsContract.PhoneLookup.DISPLAY_NAME};
 
-            String contactName = "";
+            String contactName = phoneNumber;
             Cursor cursor = context.getContentResolver().query(uri, projection, null, null, null);
 
             if (cursor != null) {
                 if (cursor.moveToFirst()) {
                     contactName = cursor.getString(0);
                 }
+                else if(phoneNumber.equals(firebaseUser.getPhoneNumber())){
+                    contactName = "Me";
+                }
+                else {
+                    contactName = phoneNumber;
+                }
                 cursor.close();
             }
-            else if(phoneNumber.equals(firebaseUser.getPhoneNumber())){
-                contactName = "Me";
-            }
-            else {
-                contactName = phoneNumber;
-            }
+
 
             return contactName;
         }

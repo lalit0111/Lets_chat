@@ -1,32 +1,25 @@
 package com.example.letschat;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.arch.core.executor.TaskExecutor;
-import androidx.cardview.widget.CardView;
-import androidx.core.app.ActivityOptionsCompat;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.gms.tasks.TaskExecutors;
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textview.MaterialTextView;
 import com.google.firebase.FirebaseException;
@@ -36,15 +29,12 @@ import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
-import com.google.firebase.storage.StorageMetadata;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.mukesh.OtpView;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
@@ -184,12 +174,12 @@ public class phone extends AppCompatActivity {
         @Override
         public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
             String code = "123456";
-            // String code = phoneAuthCredential.getSmsCode();
+//             String code = phoneAuthCredential.getSmsCode();
             pinview.setText(code);
             if (code != null) {
                 setupText.setVisibility(View.VISIBLE);
                 progressBar.setVisibility(View.VISIBLE);
-                //verifyCode(code);
+//                verifyCode(code);
                 signInUserByCredential(phoneAuthCredential);
             }
         }
@@ -251,6 +241,10 @@ public class phone extends AppCompatActivity {
                         finish();
                     }
 
+                }
+
+                else {
+                    Toast.makeText(phone.this, "Wrong OTP", Toast.LENGTH_SHORT).show();
                 }
             }
         });
