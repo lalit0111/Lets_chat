@@ -1,5 +1,9 @@
 package com.example.letschat.model;
 
+import android.content.Context;
+import android.database.Cursor;
+import android.net.Uri;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +29,6 @@ public class chatAdapter extends RecyclerView.Adapter<chatAdapter.ViewHolder> {
 
 
     public chatAdapter(List<message> messageList){
-
         this.messageList=messageList;
     }
 
@@ -61,7 +64,7 @@ public class chatAdapter extends RecyclerView.Adapter<chatAdapter.ViewHolder> {
         Log.d("check5","bind");
         holder.chatText.setText(messageList.get(position).getMessage());
         holder.timeInHrs.setText(messageList.get(position).getTime());
-        holder.number.setText(messageList.get(position).getSender());
+        holder.number.setText(holder.getContactName(messageList.get(position).getSender(),holder.itemView.getContext()));
     }
 
     @Override
@@ -81,6 +84,30 @@ public class chatAdapter extends RecyclerView.Adapter<chatAdapter.ViewHolder> {
             timeInHrs = itemView.findViewById(R.id.Globaltime);
             number = itemView.findViewById(R.id.senderNumber);
             Log.d("check5","called");
+        }
+
+        public String getContactName(final String phoneNumber, Context context) {
+            Uri uri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(phoneNumber));
+
+            String[] projection = new String[]{ContactsContract.PhoneLookup.DISPLAY_NAME};
+
+            String contactName = "";
+            Cursor cursor = context.getContentResolver().query(uri, projection, null, null, null);
+
+            if (cursor != null) {
+                if (cursor.moveToFirst()) {
+                    contactName = cursor.getString(0);
+                }
+                cursor.close();
+            }
+            else if(phoneNumber.equals(firebaseUser.getPhoneNumber())){
+                contactName = "Me";
+            }
+            else {
+                contactName = phoneNumber;
+            }
+
+            return contactName;
         }
     }
 }

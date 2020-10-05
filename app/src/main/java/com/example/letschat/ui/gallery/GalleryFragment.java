@@ -5,9 +5,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,13 +16,9 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.letschat.Chat;
 import com.example.letschat.R;
 import com.example.letschat.message;
 import com.example.letschat.model.chatAdapter;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.android.material.textview.MaterialTextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -84,7 +80,7 @@ public class GalleryFragment extends Fragment {
         });
 
 
-        final Query query = databaseReference;
+        final Query query = databaseReference.orderByKey().limitToLast(50);
 
         query.addChildEventListener(new ChildEventListener() {
             @Override
@@ -162,13 +158,13 @@ public class GalleryFragment extends Fragment {
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(root.getContext());
         chats.setLayoutManager(linearLayoutManager);
         chats.setAdapter(adapter);
-//        adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
-//            @Override
-//            public void onItemRangeInserted(int positionStart, int itemCount) {
-//                super.onItemRangeInserted(positionStart, itemCount);
-//                chats.scrollToPosition(adapter.getItemCount() - 1);
-//            }
-//        });
+        adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onItemRangeInserted(int positionStart, int itemCount) {
+                super.onItemRangeInserted(positionStart, itemCount);
+                chats.scrollToPosition(messagesList.size()- 1);
+            }
+        });
 
         return root;
     }

@@ -4,13 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="5sp">
+    android:layout_marginTop="30dp">
 
     <LinearLayout
         android:id="@+id/relativeLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="5dp"
         android:background="@drawable/round_corner_right"
@@ -26,13 +25,12 @@
             android:id="@+id/senderNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="25dp"
             android:layout_marginTop="10dp"
-            android:layout_marginRight="25dp"
             android:layout_marginBottom="5dp"
             android:fontFamily="@font/roboto_bold"
             android:text="+919509292182"
+            android:layout_marginLeft="22dp"
+            android:layout_marginRight="25dp"
             android:textColor="#ffffff"
             android:textSize="12sp" />
 
@@ -40,17 +38,13 @@
             android:id="@+id/GlobalchatText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="10dp"
             android:fontFamily="@font/muli"
-            android:maxWidth="230dp"
-            android:paddingLeft="20dp"
-            android:paddingTop="5dp"
-            android:paddingRight="20dp"
-            android:paddingBottom="10dp"
-            android:text="Hi there..."
-            android:textColor="#fff"
+            android:maxWidth="240dp"
+            android:layout_marginLeft="22dp"
+            android:layout_marginRight="25dp"
+            android:text="hi............................"
+            android:textColor="#ffffff"
             android:textSize="17sp" />
 
     </LinearLayout>
