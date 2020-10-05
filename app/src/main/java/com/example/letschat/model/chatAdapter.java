@@ -1,8 +1,10 @@
 package com.example.letschat.model;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,8 +21,8 @@ import java.util.List;
 public class chatAdapter extends RecyclerView.Adapter<chatAdapter.ViewHolder> {
 
     List<message> messageList;
-    MaterialTextView chatText;
     FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
 
     public chatAdapter(List<message> messageList){
 
@@ -46,17 +48,20 @@ public class chatAdapter extends RecyclerView.Adapter<chatAdapter.ViewHolder> {
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
         if(viewType==0){
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.right, parent, false);
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.global_right, parent, false);
         }
         else {
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.left_message, parent, false);
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.global_left, parent, false);
         }
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        chatText.setText(messageList.get(position).getMessage());
+        Log.d("check5","bind");
+        holder.chatText.setText(messageList.get(position).getMessage());
+        holder.timeInHrs.setText(messageList.get(position).getTime());
+        holder.number.setText(messageList.get(position).getSender());
     }
 
     @Override
@@ -64,11 +69,19 @@ public class chatAdapter extends RecyclerView.Adapter<chatAdapter.ViewHolder> {
         return messageList.size();
     }
 
-   public class ViewHolder extends RecyclerView.ViewHolder {
-       public ViewHolder(@NonNull View itemView) {
-           super(itemView);
-            chatText = itemView.findViewById(R.id.chatText);
-       }
-   }
+
+    public  class ViewHolder extends RecyclerView.ViewHolder {
+
+        MaterialTextView chatText;
+        TextView timeInHrs, number;
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            chatText = itemView.findViewById(R.id.GlobalchatText);
+            timeInHrs = itemView.findViewById(R.id.Globaltime);
+            number = itemView.findViewById(R.id.senderNumber);
+            Log.d("check5","called");
+        }
+    }
 }
 

@@ -16,8 +16,10 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.letschat.Chat;
 import com.example.letschat.R;
 import com.example.letschat.message;
+import com.example.letschat.model.chatAdapter;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.textview.MaterialTextView;
@@ -46,7 +48,7 @@ public class GalleryFragment extends Fragment {
     DatabaseReference databaseReference;
     List<message> messagesList;
     RecyclerView chats;
-    FirebaseRecyclerAdapter adapter;
+    chatAdapter adapter;
 
 
     private GalleryViewModel galleryViewModel;
@@ -62,9 +64,9 @@ public class GalleryFragment extends Fragment {
         messageBox = root.findViewById(R.id.GlobalmessageBox);
         send = root.findViewById(R.id.GlobalsendButton);
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference("Global").child(firebaseUser.getPhoneNumber());
+        databaseReference = firebaseDatabase.getReference("Global");
         chats = root.findViewById(R.id.GlobalchatRecyclerView);
-        messagesList = new ArrayList<>();
+        messagesList = new ArrayList<message>();
 
 
         send.setOnClickListener(new View.OnClickListener() {
@@ -72,9 +74,9 @@ public class GalleryFragment extends Fragment {
             public void onClick(View view) {
                 String message = messageBox.getText().toString().trim();
                 if (!message.isEmpty()) {
-//
-                    String currentTime = new SimpleDateFormat("hh:mm aa", Locale.getDefault()).format(new Date());
 
+                    String currentTime = new SimpleDateFormat("hh:mm aa", Locale.getDefault()).format(new Date());
+                    Log.d("check4", String.valueOf(adapter.getItemCount()));
                     addNewUserToDatabase(messageBox.getText().toString().trim(), firebaseUser.getPhoneNumber(), currentTime);
                     messageBox.setText("");
                 }
@@ -91,6 +93,7 @@ public class GalleryFragment extends Fragment {
 
                 Log.d("check4", String.valueOf(messagesList));
                 Log.d("check4", String.valueOf(snapshot.getKey()));
+                adapter.notifyDataSetChanged();
 
             }
 
@@ -116,72 +119,72 @@ public class GalleryFragment extends Fragment {
         });
 
 
-        FirebaseRecyclerOptions<message> options = new FirebaseRecyclerOptions.Builder<message>().setQuery(query, message.class).build();
-
-        adapter = new FirebaseRecyclerAdapter<message, GalleryFragment.ChatHolder>(options) {
-
-
-            @Override
-            public int getItemViewType(int position) {
-                message message = messagesList.get(position);
-
-                if (message == null) {
-                    return 0;
-                } else if (message.getSender().equals(firebaseUser.getPhoneNumber())) {
-                    return 0;
-                } else {
-                    return 1;
-                }
-            }
-
-            @NonNull
-            @Override
-            public GalleryFragment.ChatHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View view;
-
-                if (viewType == 0) {
-                    view = LayoutInflater.from(parent.getContext()).inflate(R.layout.global_right, parent, false);
-                } else {
-                    view = LayoutInflater.from(parent.getContext()).inflate(R.layout.global_left, parent, false);
-                }
-                return new ChatHolder(view);
-            }
-
-
-            @Override
-            protected void onBindViewHolder(@NonNull ChatHolder chatHolder, int i, @NonNull message message) {
-                chatHolder.chatText.setText(message.getMessage());
-                chatHolder.timeInHrs.setText(message.getTime());
-                chatHolder.number.setText(message.getSender());
-            }
-
-        };
-
+//        FirebaseRecyclerOptions<message> options = new FirebaseRecyclerOptions.Builder<message>().setQuery(query, message.class).build();
+//
+//        adapter = new FirebaseRecyclerAdapter<message, ChatHolder>(options) {
+//
+//            @Override
+//            public int getItemViewType(int position) {
+//                message message = messagesList.get(position);
+//
+//                if (message == null) {
+//                    return 0;
+//                } else if (message.getSender().equals(firebaseUser.getPhoneNumber())) {
+//                    return 0;
+//                } else {
+//                    return 1;
+//                }
+//            }
+//
+//            @NonNull
+//            @Override
+//            public ChatHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+//                View view;
+//
+//                if (viewType == 0) {
+//                    view = LayoutInflater.from(parent.getContext()).inflate(R.layout.global_right, parent, false);
+//                } else {
+//                    view = LayoutInflater.from(parent.getContext()).inflate(R.layout.global_left, parent, false);
+//                }
+//                return new ChatHolder(view);
+//            }
+//
+//            @Override
+//            protected void onBindViewHolder(@NonNull ChatHolder chatHolder, int i, @NonNull message message) {
+//                chatHolder.chatText.setText(message.getMessage());
+//                chatHolder.timeInHrs.setText(message.getTime());
+//                chatHolder.number.setText(message.getSender());
+//            }
+//        };
+//
+//        Log.d("check5", String.valueOf(adapter));
+        adapter = new chatAdapter(messagesList);
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(root.getContext());
         chats.setLayoutManager(linearLayoutManager);
         chats.setAdapter(adapter);
-        adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
-            @Override
-            public void onItemRangeInserted(int positionStart, int itemCount) {
-                super.onItemRangeInserted(positionStart, itemCount);
-                chats.scrollToPosition(adapter.getItemCount() - 1);
-            }
-        });
+//        adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+//            @Override
+//            public void onItemRangeInserted(int positionStart, int itemCount) {
+//                super.onItemRangeInserted(positionStart, itemCount);
+//                chats.scrollToPosition(adapter.getItemCount() - 1);
+//            }
+//        });
 
         return root;
     }
 
-    public static class ChatHolder extends RecyclerView.ViewHolder {
-        MaterialTextView chatText;
-        TextView timeInHrs, number;
-
-        public ChatHolder(@NonNull View itemView) {
-            super(itemView);
-            chatText = itemView.findViewById(R.id.GlobalchatText);
-            timeInHrs = itemView.findViewById(R.id.Globaltime);
-            number = itemView.findViewById(R.id.senderNumber);
-        }
-    }
+//    public class ChatHolder extends RecyclerView.ViewHolder {
+//        MaterialTextView chatText;
+//        TextView timeInHrs, number;
+//
+//        public ChatHolder(@NonNull View itemView) {
+//            super(itemView);
+//            Log.d("check5","called");
+//            chatText = itemView.findViewById(R.id.GlobalchatText);
+//            timeInHrs = itemView.findViewById(R.id.Globaltime);
+//            number = itemView.findViewById(R.id.senderNumber);
+//        }
+//    }
 
     private void addNewUserToDatabase(String message, String sender, String time) {
         message messageObject = new message(message, sender, time);

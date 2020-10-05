@@ -413,7 +413,7 @@ public class Chat extends AppCompatActivity {
 
     }
 
-    public static class ChatHolder extends RecyclerView.ViewHolder {
+    public class ChatHolder extends RecyclerView.ViewHolder {
         MaterialTextView chatText;
         TextView timeInHrs;
 
