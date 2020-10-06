@@ -54,7 +54,7 @@ public class profile_view extends AppCompatActivity {
     Long time = 0L;
     userDetails userInfo;
     String phoneOfReciever2;
-    EditText status;
+    TextView status;
     TextView phone;
     String username;
     CircleImageView editStatus;

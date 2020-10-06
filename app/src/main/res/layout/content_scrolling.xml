@@ -50,12 +50,13 @@
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
-                <EditText
+                <TextView
                     android:id="@+id/phoneOfReceiver3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:background="#00000000"
+                    android:textColor="@color/Black"
                     android:fontFamily="@font/roboto_medium"
                     android:text="Lalit Tilwani"
                     android:textSize="17sp" />
@@ -109,13 +110,14 @@
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
-                    <EditText
+                    <TextView
                         android:id="@+id/status"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:background="#00000000"
                         android:fontFamily="@font/roboto_medium"
+                        android:textColor="@color/Black"
                         android:text="Hi there..."
                         android:textSize="17sp" />
 

@@ -428,7 +428,7 @@ public class Chat extends AppCompatActivity {
     private void addNewUserToDatabase(String message, String sender, String time) {
         message messageObject = new message(message, sender, time);
         databaseReference.push().setValue(messageObject);
-        Toast.makeText(this, "addded", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "addded", Toast.LENGTH_SHORT).show();
 
     }
 

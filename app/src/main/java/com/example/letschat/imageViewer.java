@@ -67,7 +67,7 @@ public class imageViewer extends AppCompatActivity {
         Intent intent = getIntent();
         final String phone = intent.getStringExtra("phone");
 
-        Toast.makeText(this, phone, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, phone, Toast.LENGTH_SHORT).show();
 
 
         firebaseDatabase=FirebaseDatabase.getInstance();

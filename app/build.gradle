@@ -2,6 +2,14 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 
 android {
+    signingConfigs {
+        chat {
+            storeFile file('C:\\Users\\91950\\Desktop\\key.jks')
+            storePassword 'decidous'
+            keyAlias 'key0'
+            keyPassword 'decidous'
+        }
+    }
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
 
@@ -13,12 +21,14 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.chat
     }
 
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.chat
         }
     }
 }
