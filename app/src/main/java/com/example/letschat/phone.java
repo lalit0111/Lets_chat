@@ -173,14 +173,14 @@ public class phone extends AppCompatActivity {
 
         @Override
         public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
-            String code = "123456";
-//             String code = phoneAuthCredential.getSmsCode();
+//            String code = "123456";
+             String code = phoneAuthCredential.getSmsCode();
             pinview.setText(code);
             if (code != null) {
                 setupText.setVisibility(View.VISIBLE);
                 progressBar.setVisibility(View.VISIBLE);
-//                verifyCode(code);
-                signInUserByCredential(phoneAuthCredential);
+                verifyCode(code);
+//                signInUserByCredential(phoneAuthCredential);
             }
         }
 

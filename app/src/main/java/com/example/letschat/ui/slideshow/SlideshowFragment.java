@@ -2,11 +2,9 @@ package com.example.letschat.ui.slideshow;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,14 +12,11 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.bumptech.glide.Glide;
@@ -30,10 +25,7 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.signature.MediaStoreSignature;
-import com.example.letschat.MainActivity;
 import com.example.letschat.R;
-import com.example.letschat.imageViewer;
-import com.example.letschat.phone;
 import com.example.letschat.userDetails;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.button.MaterialButton;
@@ -49,13 +41,9 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.io.IOException;
-
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static android.app.Activity.RESULT_OK;
-import static androidx.core.content.ContextCompat.getSystemService;
-import static androidx.core.content.ContextCompat.getSystemServiceName;
 
 public class SlideshowFragment extends Fragment {
 
@@ -107,7 +95,7 @@ public class SlideshowFragment extends Fragment {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         phone = firebaseUser.getPhoneNumber();
         imageSelectedForUpload = false;
-
+        myPhone.setText(phone);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference().child("Users").child(phone);

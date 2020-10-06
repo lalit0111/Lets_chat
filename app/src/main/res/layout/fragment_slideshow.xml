@@ -99,6 +99,7 @@
                             android:background="#00000000"
                             android:fontFamily="@font/roboto_medium"
                             android:text="Lalit Tilwani"
+                            android:maxLines="1"
                             android:textSize="17sp"
                             android:clickable="false"/>
 
