@@ -26,7 +26,7 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.signature.MediaStoreSignature;
 import com.example.letschat.R;
-import com.example.letschat.userDetails;
+import com.example.letschat.models.userDetails;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -72,8 +72,6 @@ public class SlideshowFragment extends Fragment {
                 ViewModelProviders.of(this).get(SlideshowViewModel.class);
         final View root = inflater.inflate(R.layout.fragment_slideshow, container, false);
 
-//        TextView toolbarText = getActivity().findViewById(R.id.title_text);
-//        toolbarText.setText("Settings");
 
         uploadButton = root.findViewById(R.id.uploadImageButton2);
         userImage = root.findViewById(R.id.userImage2);

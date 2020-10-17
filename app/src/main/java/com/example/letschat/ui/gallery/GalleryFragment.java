@@ -5,7 +5,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
@@ -16,9 +15,9 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.letschat.Adapters.GlobalChatAdapter;
 import com.example.letschat.R;
-import com.example.letschat.message;
-import com.example.letschat.model.chatAdapter;
+import com.example.letschat.models.message;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -44,7 +43,7 @@ public class GalleryFragment extends Fragment {
     DatabaseReference databaseReference;
     List<message> messagesList;
     RecyclerView chats;
-    chatAdapter adapter;
+    GlobalChatAdapter adapter;
 
 
     private GalleryViewModel galleryViewModel;
@@ -154,7 +153,7 @@ public class GalleryFragment extends Fragment {
 //        };
 //
 //        Log.d("check5", String.valueOf(adapter));
-        adapter = new chatAdapter(messagesList);
+        adapter = new GlobalChatAdapter(messagesList);
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(root.getContext());
         chats.setLayoutManager(linearLayoutManager);
         chats.setAdapter(adapter);

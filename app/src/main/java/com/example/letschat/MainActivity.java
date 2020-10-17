@@ -1,41 +1,35 @@
 package com.example.letschat;
 
 import android.content.Intent;
-import android.content.pm.Signature;
-import android.content.res.Configuration;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.util.Log;
-import android.view.MenuItem;
-import android.view.OrientationEventListener;
-import android.view.View;
 import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.annotation.GlideExtension;
 import com.bumptech.glide.load.DataSource;
-import com.bumptech.glide.load.Key;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.load.engine.executor.GlideExecutor;
-import com.bumptech.glide.module.GlideModule;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.signature.MediaStoreSignature;
-import com.bumptech.glide.signature.ObjectKey;
-import com.example.letschat.model.Adapter;
-import com.example.letschat.ui.home.HomeFragment;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+import com.example.letschat.Adapters.HomeAdapter;
+import com.example.letschat.models.userDetails;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -45,29 +39,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageMetadata;
 import com.google.firebase.storage.StorageReference;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
-
-import java.io.File;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
-    Adapter adapter;
+    HomeAdapter adapter;
     RecyclerView recyclerView;
     private static final float END_SCALE = 0.7f;
     View contentView;
@@ -158,8 +137,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
                 .setDrawerLayout(drawer)
@@ -171,15 +148,11 @@ public class MainActivity extends AppCompatActivity {
         drawer.addDrawerListener(new DrawerLayout.SimpleDrawerListener() {
             @Override
             public void onDrawerSlide(View drawerView, float slideOffset) {
-                // labelView.setVisibility(slideOffset > 0 ? View.VISIBLE : View.GONE);
-
-                // Scale the View based on current slide offset
                 final float diffScaledOffset = slideOffset * (1.2f - END_SCALE);
                 final float offsetScale = 1 - diffScaledOffset;
                 contentView.setScaleX(offsetScale);
                 contentView.setScaleY(offsetScale);
 
-                // Translate the View, accounting for the scaled width
                 final float xOffset = drawerView.getWidth() * slideOffset;
                 final float xOffsetDiff = contentView.getWidth() * diffScaledOffset / 2;
                 final float xTranslation = xOffset - xOffsetDiff;
@@ -190,18 +163,12 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-//        if (intent.getData() != null) {
-//            File imageToShow = (File) intent.getExtras().get("image");
-//            Bitmap bitmap = BitmapFactory.decodeFile(imageToShow.getAbsolutePath());
-//            drawerImage.setImageBitmap(bitmap);
-//        }
-
 
         drawerImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String phone = userInfo.getPhoneNumber();
-                Intent intent = new Intent(MainActivity.this, imageViewer.class);
+                Intent intent = new Intent(MainActivity.this, ImageViewerActivity.class);
                 intent.putExtra("phone", phone);
                 startActivity(intent);
             }
@@ -211,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
@@ -227,7 +194,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId()==R.id.action_settings){
             FirebaseAuth.getInstance().signOut();
-            Intent intent = new Intent(MainActivity.this, phone.class);
+            Intent intent = new Intent(MainActivity.this, PhoneActivity.class);
             startActivity(intent);
             finish();
         }
