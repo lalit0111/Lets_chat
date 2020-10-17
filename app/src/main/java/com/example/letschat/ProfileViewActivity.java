@@ -74,7 +74,7 @@ public class ProfileViewActivity extends AppCompatActivity {
 
         Log.e("check",phoneOfReciever2);
 
-        phone.setText(phoneOfReciever2.toString());
+        phone.setText(phoneOfReciever2);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference().child("Users").child(phoneOfReciever2);
