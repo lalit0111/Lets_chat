@@ -15,12 +15,12 @@ Chat Application for android.
 
 ## Screenshots
 
-<img src="Screenshots/sign_up.jpg" width="20%" height="400" align="left">
-<img src="Screenshots/otp.jpg" width="20%" height="400" align="left">
-<img src="Screenshots/Global_chat.jpg" width="20%" height="400" align="left">
-<img src="Screenshots/chat.jpg" width="20%" height="400" align="left">
-<img src="Screenshots/home.jpg" width="20%" height="400" align="left">
-<img src="Screenshots/main.jpg" width="20%" height="400" align="left">
-<img src="Screenshots/home.jpg" width="20%" height="400" align="left">
+<img src="Screenshots/sign_up.jpg" width="25%" height="50%" align="left">
+<img src="Screenshots/otp.jpg" width="25%" height="50%" align="left">
+<img src="Screenshots/Global_chat.jpg" width="25%" height="50%" align="left">
+<img src="Screenshots/chat.jpg" width="25%" height="50%" align="left">
+<img src="Screenshots/home.jpg" width="25%" height="50%" align="left">
+<img src="Screenshots/main.jpg" width="25%" height="50%" align="left">
+<img src="Screenshots/home.jpg" width="25%" height="50%" align="left">
 
 
